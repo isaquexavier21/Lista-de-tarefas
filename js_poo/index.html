@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header>
+        <h1>Lista de Tarefas</h1>
+        <nav>
+            <!-- Links de navegação corrigidos com as âncoras -->
+            <a href="#inicio">Inicio</a>
+            <a href="#tarefas">Tarefas</a>
+            <a href="#contato">Contato</a>
+        </nav>
+    </header>
+
+    <div id="inicio" class="container">
+        <h1>Adicionar nova Tarefa</h1>
+        <div>
+            <input type="text" id="tarefaInput" placeholder="Digite uma tarefa">
+            <button onclick="adicionarTarefa()">Adicionar</button>
+        </div>
+
+        <ul id="listaTarefas"></ul>
+    </div>
+
+    <footer id="contato">
+        <p>&copy; 2025 SENAI. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        let tarefas = [];
+
+        function adicionarTarefa() {
+            const input = document.getElementById('tarefaInput');
+            const tarefa = input.value.trim();
+            if (tarefa) {
+                tarefas.push(tarefa);
+                input.value = '';
+                atualizarLista();
+            }
+        }
+
+        function removerTarefa(index) {
+            tarefas.splice(index, 1);
+            atualizarLista();
+        }
+
+        function atualizarLista() {
+            const lista = document.getElementById('listaTarefas');
+            lista.innerHTML = '';
+            tarefas.forEach((tarefa, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `${tarefa} <button onclick="removerTarefa(${index})">Remover</button>`;
+                lista.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
